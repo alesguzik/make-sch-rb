@@ -111,7 +111,15 @@ EOF
 
     },
     course:->(course){
-      course.format('  & %t1 -- %t2 & %n & %p \\\\ \cline{2-4}'+"\n")
+      course.format("  & %t1 -- %t2 & %n " +
+                    (case course.class.to_s
+                    when "Lecture"
+                       "(лк)"
+                    when "Practical"
+                       "(пз)"
+                    else
+                       ""
+                    end) + " & %p \\\\ \\cline{2-4}\n")
     },
     day_end:->(date,courses_num){
       ""

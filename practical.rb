@@ -3,7 +3,13 @@ require_relative 'course'
 class Practical < Course
   def self.load(group_name,alttime,start_year,file)
     pz = File.open(file).lines.to_a
-    practical = pz.shift.chomp.split("\t").zip(pz.shift.chomp.split("\t")).map{|a| "#{a[0]} #{a[1]}"}
+    practical = pz.shift.chomp.split("\t").zip(pz.shift.chomp.split("\t")).map do |a|
+      if a[0][-1]=='-'
+        a[0][0...-1] + a[1]
+      else
+        a.join(" ")
+      end
+    end
 
     time = pz.shift.match(/(\d\d\.\d\d)\-(\d\d\.\d\d)\D*(\d\d\.\d\d)\-(\d\d\.\d\d)/)[1,4]
     pz_times = time.map{|s| Time.strptime s,"%H.%M"}
