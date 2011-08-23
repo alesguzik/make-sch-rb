@@ -25,14 +25,15 @@ def make_work_days(first_day,last_day,courses)
 end
 
 def output(group,work_days,formatters)
-  o = STDOUT
-  o << formatters[:header].(group)
+  s = ""
+  s << formatters[:header].(group)
   work_days.each do |date,courses|
-    o << formatters[:day_begin].(date)
+    s << formatters[:day_begin].(date,courses.size)
     courses.each do |course|
-      o << formatters[:course].(course)
+      s << formatters[:course].(course)
     end
-    o << formatters[:day_end].(date)
+    s << formatters[:day_end].(date,courses.size)
   end
-  o << formatters[:header].(group)
+  s << formatters[:footer].(group)
+  s
 end

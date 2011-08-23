@@ -19,8 +19,9 @@ if ARGV.size == 1
 end
 
 group_name = ARGV.shift || 434
+format = ARGV.shift || "tex"
 start_year = (ARGV.shift || 2011).to_i
-alttime = (ARGV[3] || "1 2 6 9 12").split.map(&:to_i)
+alttime = (ARGV.empty? ? ARGV.join(" ") : "1 2 6 9 12").split.map(&:to_i)
 
 practical = Practical.load(group_name,alttime,start_year,"pz.txt")
 lectures,exams = Lecture.load(group_name,start_year,"lk.txt")
@@ -33,5 +34,4 @@ wd = make_work_days(first_day,last_day,[[PT.new(3,[Time.strptime("18.20","%H.%M"
                                    lectures
                                   ])
 
-
-output(group_name,wd,FORMATS[:txt])
+File.open("#{group_name}.#{format}","w").write(output(group_name,wd,FORMATS[format]))
