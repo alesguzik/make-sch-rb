@@ -21,7 +21,7 @@ end
 group_name = ARGV.shift || 434
 format = ARGV.shift || "tex"
 start_year = (ARGV.shift || 2011).to_i
-alttime = (ARGV.empty? ? ARGV.join(" ") : "1 2 6 9 12").split.map(&:to_i)
+alttime = (ARGV.empty? ? "1 2 6 9 12" : ARGV.join(" ")).split.map(&:to_i)
 
 practical = Practical.load(group_name,alttime,start_year,"pz.txt")
 lectures,exams = Lecture.load(group_name,start_year,"lk.txt")

@@ -16,9 +16,9 @@ class Practical < Course
     pz_t = []
     practical.size.times do |i|
       if alttime.include?(i)
-        pz_t.push pz_times[0,2]
-      else
         pz_t.push pz_times[2,2]
+      else
+        pz_t.push pz_times[0,2]
       end
     end
     

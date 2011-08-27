@@ -9,4 +9,3 @@
     rm #{i}.log"
   )
 end
-
